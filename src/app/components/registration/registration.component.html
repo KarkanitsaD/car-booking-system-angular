@@ -1,0 +1,68 @@
+<div class="image-uploader-div">
+  <app-image-uploader [disabled]="disabledForm" (onImageSelectedChanges)="onImageSelected($event)">
+  </app-image-uploader>
+</div>
+<br>
+<br>
+<form [formGroup]="registrationForm" class="registration-form-field-full-width">
+  <mat-form-field appearance="outline" color="primary" class="registration-form-field-full-width">
+    <mat-label>
+      Email
+    </mat-label>
+    <input type="email" matInput formControlName="email" [disabled]="disabledForm">
+    <mat-error *ngIf="registrationForm.controls.email.hasError('required') && registrationForm.controls.email.touched">
+      Email is required!
+    </mat-error>
+    <mat-error *ngIf="registrationForm.controls.email.invalid && registrationForm.controls.email.touched && !registrationForm.controls.email.hasError('required')">
+      Enter valid email!
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="registration-form-field-full-width" appearance="outline">
+    <mat-label>
+      Password
+    </mat-label>
+    <input [type]="hidePassword ? 'password' : 'text'"  matInput formControlName="password" [disabled]="disabledForm">
+    <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+      <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+    <mat-error *ngIf="registrationForm.controls.password.hasError('required') && registrationForm.controls.password.touched">
+      Password is required!
+    </mat-error>
+    <mat-error *ngIf="registrationForm.controls.password.invalid && registrationForm.controls.password.touched && !registrationForm.controls.password.hasError('required')">
+      Enter valid password!
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="registration-form-field-full-width" appearance="outline">
+    <mat-label>
+      Confirm password
+    </mat-label>
+    <input [type]="hidePassword ? 'password' : 'text'"  matInput formControlName="confirmPassword" [disabled]="disabledForm">
+    <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+      <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+    <mat-error *ngIf="registrationForm.controls.confirmPassword.hasError('mustMatch') && registrationForm.controls.confirmPassword.touched">
+      Passwords are not equal!
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="registration-form-field-full-width" appearance="outline">
+    <mat-label>
+      Name
+    </mat-label>
+    <input type="text" matInput formControlName="userName" [disabled]="disabledForm">
+  </mat-form-field>
+  <mat-form-field class="registration-form-field-half-width" appearance="outline">
+    <mat-label>
+      Surname
+    </mat-label>
+    <input type="text" matInput formControlName="userSurname" [disabled]="disabledForm">
+  </mat-form-field>
+  <mat-form-field class="registration-form-field-half-width" appearance="outline">
+    <mat-label>
+      Phone
+    </mat-label>
+    <input type="text" matInput formControlName="phoneNumber" [disabled]="disabledForm">
+  </mat-form-field>
+</form>
+<button mat-raised-button color="primary" class="registration-form-field-full-width" (click)="submit()" [disabled]="disabledForm">
+  Register
+</button>

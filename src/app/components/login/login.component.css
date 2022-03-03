@@ -1,0 +1,21 @@
+.login-form {
+  width: 100%;
+}
+
+.login-form-field {
+  width: 100%;
+}
+
+.bottom-form-field {
+  margin-top: 5px;
+}
+
+.error-div {
+  padding-left: 10px;
+  width: 100%;
+  color: black;
+  border-radius: 2px;
+  background-color: #ff4040;
+  vertical-align: middle;
+  margin-bottom: 10px;
+}

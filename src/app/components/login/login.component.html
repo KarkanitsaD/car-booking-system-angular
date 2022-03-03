@@ -1,0 +1,35 @@
+<div *ngIf="errorMessage" class="error-div">
+  {{errorMessage}}
+</div>
+<form [formGroup]="login" class="login-form">
+  <mat-form-field class="login-form-field" appearance="outline" color="primary">
+    <mat-label>
+      Email
+    </mat-label>
+    <input type="email" matInput formControlName="email">
+    <mat-error *ngIf="login.controls.email.hasError('required') && login.controls.email.touched">
+      Email is required!
+    </mat-error>
+    <mat-error *ngIf="login.controls.email.invalid && login.controls.email.touched && !login.controls.email.hasError('required')">
+      Enter valid email!
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="login-form-field bottom-form-field" appearance="outline">
+    <mat-label>
+      Password
+    </mat-label>
+    <input [type]="hidePassword ? 'password' : 'text'" class="password-input" matInput formControlName="password">
+    <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+      <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+    <mat-error *ngIf="login.controls.password.hasError('required') && login.controls.password.touched">
+      Password is required!
+    </mat-error>
+    <mat-error *ngIf="login.controls.password.invalid && login.controls.password.touched && !login.controls.password.hasError('required')">
+      Enter valid password!
+    </mat-error>
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="submit()">
+    Login
+  </button>
+</form>

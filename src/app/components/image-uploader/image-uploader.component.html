@@ -1,0 +1,13 @@
+<div class="image-div">
+  <img [src]="imageUrl"/>
+</div>
+
+<input [disabled]="disabled"  type="file" #fileInput style="display: none" (change)="onImageSelected($event)">
+
+<button [disabled]="disabled" *ngIf="isUploadButtonVisible" (click)="fileInput.click()" mat-raised-button color="primary">
+  Upload photo
+</button>
+<button [disabled]="disabled" *ngIf="!isUploadButtonVisible" (click)="cancelSelection()" mat-raised-button color="warn">
+  Cancel
+</button>
+
