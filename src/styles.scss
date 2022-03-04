@@ -45,5 +45,23 @@ $car-booking-system-angular-theme: mat.define-light-theme((
   color: yellow;
 }
 
+.form-field-full-width {
+  width: 100%;
+}
+
+.form-field-half-width {
+  width: 50%;
+}
+
+.form-field-third-width {
+  width: 33%;
+}
+
+.bottom-form-field {
+  margin-top: 5px;
+}
+
+
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

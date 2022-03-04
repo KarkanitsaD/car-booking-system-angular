@@ -14,6 +14,12 @@ import {serviceDeclarations} from "./core/constans/export-constans";
 import {HttpService} from "./core/services/http.service";
 import {AuthService} from "./core/services/auth.service";
 import {HttpClientModule} from "@angular/common/http";
+import { CarFormComponent } from './components/car/car-form/car-form.component';
+import { ImagesUploaderComponent } from './components/images-uploader/images-uploader.component';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import {metaReducers, reducers} from "./store";
 
 @NgModule({
   declarations: [
@@ -22,6 +28,8 @@ import {HttpClientModule} from "@angular/common/http";
     LoginComponent,
     RegistrationComponent,
     ImageUploaderComponent,
+    CarFormComponent,
+    ImagesUploaderComponent,
   ],
   imports: [
     MaterialModule,
@@ -29,11 +37,14 @@ import {HttpClientModule} from "@angular/common/http";
     AppRoutingModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    StoreModule.forRoot(reducers, {
+      metaReducers
+    }),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [
-    HttpService,
-    AuthService
+    serviceDeclarations
   ],
   bootstrap: [AppComponent]
 })

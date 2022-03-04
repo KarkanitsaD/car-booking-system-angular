@@ -1,0 +1,21 @@
+<div class="main-div">
+  <div class="scroll">
+    <div style="margin-bottom: 3px;">
+      <div *ngFor="let image of images; let i = index;" class="div-in-scroll">
+        <div class="image-div">
+          <img [src]="image.url">
+        </div>
+        <div>
+          <button [disabled]="disabled" mat-raised-button color="warn" class="remove-button" (click)="remove(i)">
+            Remove
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <input type="file" #fileInput style="display: none" (change)="onImageSelected($event)">
+  <button mat-raised-button [disabled]="disabled" color="primary" class="upload-button" (click)="fileInput.click()">
+    Upload image
+  </button>
+</div>
+

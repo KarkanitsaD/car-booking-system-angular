@@ -1,0 +1,79 @@
+<div *ngIf="carForm">
+  <form [formGroup]="carForm" class="form-field-full-width">
+    <mat-form-field class="form-field-third-width" color="primary" appearance="outline">
+      <mat-label>
+        Price per day
+      </mat-label>
+      <input type="text" matInput formControlName="pricePerDay">
+      <mat-error *ngIf="carForm.controls.pricePerDay.hasError('required') && carForm.controls.pricePerDay.touched">
+        Price per day is required!
+      </mat-error>
+      <mat-error *ngIf="carForm.controls.pricePerDay.invalid && carForm.controls.pricePerDay.touched && !carForm.controls.pricePerDay.hasError('required')">
+        Invalid value!
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="form-field-third-width" color="primary" appearance="outline">
+      <mat-label>
+        Brand
+      </mat-label>
+      <input type="text" matInput formControlName="brand">
+      <mat-error *ngIf="carForm.controls.brand.hasError('required') && carForm.controls.brand.touched">
+        Brand is required!
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="form-field-third-width" color="primary" appearance="outline">
+      <mat-label>
+        Price per day
+      </mat-label>
+      <input type="text" matInput formControlName="model">
+      <mat-error *ngIf="carForm.controls.model.hasError('required') && carForm.controls.model.touched">
+        Model is required!
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="form-field-third-width" color="primary" appearance="outline">
+      <mat-label>
+        Fuel consumption
+      </mat-label>
+      <input type="text" matInput formControlName="fuelConsumption">
+      <mat-error *ngIf="carForm.controls.fuelConsumption.hasError('required') && carForm.controls.fuelConsumption.touched">
+        Fuel consumption is required!
+      </mat-error>
+      <mat-error *ngIf="carForm.controls.fuelConsumption.invalid && carForm.controls.fuelConsumption.touched && !carForm.controls.fuelConsumption.hasError('required')">
+        Invalid value!
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="form-field-third-width" color="primary" appearance="outline">
+      <mat-label>
+        Number of seats
+      </mat-label>
+      <input type="text" matInput formControlName="numberOfSeats">
+      <mat-error *ngIf="carForm.controls.numberOfSeats.hasError('required') && carForm.controls.numberOfSeats.touched">
+        Number of seats is required!
+      </mat-error>
+      <mat-error *ngIf="carForm.controls.numberOfSeats.invalid && carForm.controls.numberOfSeats.touched && !carForm.controls.numberOfSeats.hasError('required')">
+        Invalid value!
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="form-field-third-width" color="primary" appearance="outline">
+      <mat-label>
+        Transmission type
+      </mat-label>
+      <mat-select [value]="carModel.carTransmissionId">
+        <mat-option value="1">Mechanic</mat-option>
+        <mat-option value="2">Automate</mat-option>
+      </mat-select>
+      <mat-error *ngIf="carForm.controls.carTransmissionId.hasError('required') && carForm.controls.carTransmissionId.touched">
+        Number of seats is required!
+      </mat-error>
+      <mat-error *ngIf="carForm.controls.carTransmissionId.invalid && carForm.controls.carTransmissionId.touched && !carForm.controls.carTransmissionId.hasError('required')">
+        Invalid value!
+      </mat-error>
+    </mat-form-field>
+    <app-images-uploader [images]="carImages"></app-images-uploader>
+    <mat-error *ngIf="carImagesTouched && carImages.length === 0">
+      Upload at least one image!
+    </mat-error>
+    <button *ngIf="!isEditMode" (click)="create()" mat-raised-button color="accent" class="form-field-full-width bottom-form-field add-update-button">Add</button>
+    <button *ngIf=isEditMode (click)="update()" mat-raised-button color="accent" class="form-field-full-width bottom-form-field add-update-button">Update</button>
+  </form>
+</div>
