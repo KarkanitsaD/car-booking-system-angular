@@ -1,7 +1,7 @@
 import {createFeatureSelector, createSelector} from "@ngrx/store";
-import {auth, AuthState} from "./auth-state";
+import {authState, AuthState} from "./auth-state";
 
-export const authStateSelector = createFeatureSelector<AuthState>(auth);
+export const authStateSelector = createFeatureSelector<AuthState>(authState);
 
 export const loggedUserSelector = createSelector(
   authStateSelector,

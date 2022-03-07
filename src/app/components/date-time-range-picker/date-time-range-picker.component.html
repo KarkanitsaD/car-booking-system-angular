@@ -1,0 +1,54 @@
+<div>
+  <mat-form-field appearance="outline" color="primary">
+    <mat-label>
+      Pick up date
+    </mat-label>
+    <input matInput [matDatepicker]="dp1" [(ngModel)]="timeRange.firstDate" class="date-input" disabled (ngModelChange)="timeRangeChange()">
+    <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+    <mat-datepicker #dp1 disabled="false"></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="hours-minutes-div">
+    <mat-label>HH</mat-label>
+    <mat-select [(ngModel)]="timeRange.firstHours" (ngModelChange)="timeRangeChange()">
+      <mat-option *ngFor="let hour of hoursViewsValues" [value]="hour.val">
+        {{hour.view}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  :
+  <mat-form-field appearance="outline" class="hours-minutes-div">
+    <mat-label>MM</mat-label>
+    <mat-select [(ngModel)]="timeRange.firstMinutes" (ngModelChange)="timeRangeChange()">
+      <mat-option *ngFor="let minute of minutesViewsValues" [value]="minute.val">
+        {{minute.view}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div>
+  <mat-form-field appearance="outline" color="primary">
+    <mat-label>
+      Hand over date
+    </mat-label>
+    <input matInput [matDatepicker]="dp2" class="date-input" [(ngModel)]="timeRange.secondDate" disabled (ngModelChange)="timeRangeChange()">
+    <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+    <mat-datepicker #dp2 disabled="false"></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="hours-minutes-div">
+    <mat-label>HH</mat-label>
+    <mat-select [(ngModel)]="timeRange.secondHours" (ngModelChange)="timeRangeChange()">
+      <mat-option *ngFor="let hour of hoursViewsValues" [value]="hour.val">
+        {{hour.view}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  :
+  <mat-form-field appearance="outline" class="hours-minutes-div">
+    <mat-label>MM</mat-label>
+    <mat-select [(ngModel)]="timeRange.secondMinutes" (ngModelChange)="timeRangeChange()">
+      <mat-option *ngFor="let minute of minutesViewsValues" [value]="minute.val">
+        {{minute.view}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

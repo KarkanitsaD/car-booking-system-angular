@@ -1,13 +1,16 @@
-<p>header works!</p>
-<button mat-fab class="success" color="primary">Button</button>
-
-<mat-button-toggle-group #group="matButtonToggleGroup">
-  <mat-button-toggle value="1" (click)="click()">Bold</mat-button-toggle>
-  <mat-button-toggle value="2">Italic</mat-button-toggle>
-  <mat-button-toggle value="3">Underline</mat-button-toggle>
-</mat-button-toggle-group>
-<div>{{group.value}}</div>
-
-<mat-icon color="primary" aria-hidden="true">
-done
-</mat-icon>
+<mat-toolbar color="primary" >
+  <button mat-button class="mat-headline">Car Booking System</button>
+  <span class="example-spacer"></span>
+  <div *ngIf="(currentUser$ | async)">
+    <button mat-icon-button>
+      <mat-icon>
+        <img src="https://img.icons8.com/material-outlined/24/000000/user--v1.png"/>
+      </mat-icon>
+    </button>
+  </div>
+  <div *ngIf="!(currentUser$ | async)">
+    <button mat-button>
+      Login
+    </button>
+  </div>
+</mat-toolbar>

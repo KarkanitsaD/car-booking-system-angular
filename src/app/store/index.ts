@@ -1,14 +1,18 @@
 import {ActionReducerMap, MetaReducer} from "@ngrx/store";
 import {environment} from "../../environments/environment";
-import {auth, AuthState} from "./auth/auth-state";
+import {authState, AuthState} from "./auth/auth-state";
 import {authStateReducer} from "./auth/auth-state.reducer";
+import {LocationState, locationState} from "./location/location-state";
+import {locationStateReducer} from "./location/location-state.reducer";
 
-export interface Store {
-  [auth]: AuthState
+export interface ApplicationStore {
+  [authState]: AuthState,
+  [locationState]: LocationState
 }
 
-export const reducers: ActionReducerMap<Store> = {
-  [auth]: authStateReducer
+export const reducers: ActionReducerMap<ApplicationStore> = {
+  [authState]: authStateReducer,
+  [locationState]: locationStateReducer
 };
 
-export const metaReducers: MetaReducer<Store>[] = !environment.production ? [] : [];
+export const metaReducers: MetaReducer<ApplicationStore>[] = !environment.production ? [] : [];

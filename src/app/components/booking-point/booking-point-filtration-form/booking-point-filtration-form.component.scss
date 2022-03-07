@@ -1,0 +1,17 @@
+.container {
+  width: 620px;
+  display: flex;
+  flex-direction: row;
+}
+
+.main-div {
+  width: 620px;
+}
+
+.form-div {
+  flex: auto;
+}
+
+.filter-button {
+  width: 100%;
+}
