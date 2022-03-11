@@ -8,6 +8,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatSelectModule} from "@angular/material/select";
 import {MatNativeDateModule} from "@angular/material/core";
 import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatTabsModule} from "@angular/material/tabs";
+import {MatDialogModule} from "@angular/material/dialog";
 
 const MaterialComponents = [
   MatButtonModule,
@@ -18,7 +20,9 @@ const MaterialComponents = [
   MatSnackBarModule,
   MatSelectModule,
   MatNativeDateModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatTabsModule,
+  MatDialogModule
 ]
 
 @NgModule({

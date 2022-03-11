@@ -9,7 +9,7 @@
     </button>
   </div>
   <div *ngIf="!(currentUser$ | async)">
-    <button mat-button>
+    <button mat-button (click)="onLoginClick()">
       Login
     </button>
   </div>

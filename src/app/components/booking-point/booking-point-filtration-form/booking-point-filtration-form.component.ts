@@ -6,6 +6,8 @@ import {CountryModel} from "../../../domain/models/country/country.model";
 import {citiesSelector, countriesSelector} from "../../../store/location/location-state.selectors";
 import {CityModel} from "../../../domain/models/city/city.model";
 import {map, throttleTime} from "rxjs/operators";
+import {DateTimeRangeModel} from "../../date-time-range-picker/date-time-range-picker.component";
+import {currentBookingPointsFiltrationModelSelector} from "../../../store/booking-points/booking-points.selectors";
 
 @Component({
   selector: 'app-booking-point-filtration-form',
@@ -17,10 +19,18 @@ export class BookingPointFiltrationFormComponent implements OnInit, AfterViewIni
   public countries$: Observable<CountryModel[]> = this.store.select(countriesSelector);
   public cities$: Observable<CityModel[]> = this.store.select(citiesSelector);
   public citiesToShow$: Observable<CityModel[]> = new Observable<CityModel[]>();
+  public cityId: string | null = null;
+  public countryId: string | null = null;
 
-  public cityId: number | null = null;
-  public countryId: number | null = null;
-  public dateTimeRange: Date[] = [];
+  public bookingPointsFiltrationModel$ = this.store.select(currentBookingPointsFiltrationModelSelector);
+  public dateTimeRangeModel: DateTimeRangeModel = {
+    firstDate: new Date(),
+    firstHours: 10,
+    firstMinutes: 0,
+    secondDate: new Date(),
+    secondHours: 19,
+    secondMinutes: 0
+  };
 
   constructor
   (
@@ -39,11 +49,11 @@ export class BookingPointFiltrationFormComponent implements OnInit, AfterViewIni
       ).subscribe(() => console.log(2));
   }
 
-  public onCountrySelected(event: any): void {
-    this.filterCities(event.value);
+  public onCountrySelected(): void {
+    this.filterCities(this.countryId);
   }
 
-  private filterCities(countryId: string): void {
+  private filterCities(countryId: string | null): void {
     this.citiesToShow$ = this.cities$.pipe(
       map(cities => cities.filter(city => city.countryId === countryId))
     );

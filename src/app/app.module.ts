@@ -11,7 +11,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { RegistrationComponent } from './components/registration/registration.component';
 import { ImageUploaderComponent } from './components/image-uploader/image-uploader.component';
 import {serviceDeclarations} from "./core/constans/export-constans";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { CarFormComponent } from './components/car/car-form/car-form.component';
 import { ImagesUploaderComponent } from './components/images-uploader/images-uploader.component';
 import { StoreModule } from '@ngrx/store';
@@ -20,9 +20,10 @@ import { environment } from '../environments/environment';
 import {metaReducers, reducers} from "./store";
 import { DateTimeRangePickerComponent } from './components/date-time-range-picker/date-time-range-picker.component';
 import {MatDatepickerModule} from "@angular/material/datepicker";
-import {DateAdapter} from "@angular/material/core";
 import { BookingPointFiltrationFormComponent } from './components/booking-point/booking-point-filtration-form/booking-point-filtration-form.component';
 import { BookingPointsPageComponent } from './components/booking-point/booking-points-page/booking-points-page.component';
+import { AuthModalComponent } from './components/auth-modal/auth-modal.component';
+import {HttpHeadersInterceptor} from "./core/interceptors/http-headers.interceptor";
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { BookingPointsPageComponent } from './components/booking-point/booking-p
     DateTimeRangePickerComponent,
     BookingPointFiltrationFormComponent,
     BookingPointsPageComponent,
+    AuthModalComponent,
   ],
   imports: [
     MaterialModule,
@@ -54,7 +56,7 @@ import { BookingPointsPageComponent } from './components/booking-point/booking-p
   ],
   providers: [
     serviceDeclarations,
-   /* { provide: DateAdapter, useValue: { useUtc: true } }*/
+    {provide: HTTP_INTERCEPTORS, useClass: HttpHeadersInterceptor, multi: true},
   ],
   bootstrap: [AppComponent]
 })

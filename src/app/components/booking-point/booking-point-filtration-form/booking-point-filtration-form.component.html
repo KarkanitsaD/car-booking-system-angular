@@ -4,7 +4,7 @@
       <div>
         <mat-form-field appearance="outline">
           <mat-label>Country</mat-label>
-          <mat-select (selectionChange)="onCountrySelected($event)" [(ngModel)]="countryId">
+          <mat-select [(ngModel)]="countryId" (ngModelChange)="onCountrySelected()">
             <mat-option value="null">
               All
             </mat-option>
@@ -29,7 +29,7 @@
       </div>
     </div>
     <div class="form-div">
-      <app-date-time-range-picker [(dateTimeRange)]="dateTimeRange"></app-date-time-range-picker>
+      <app-date-time-range-picker [dateTimeRange]="dateTimeRangeModel"></app-date-time-range-picker>
     </div>
   </div>
   <div>

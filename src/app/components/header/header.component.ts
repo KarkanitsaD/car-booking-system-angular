@@ -4,6 +4,8 @@ import {Store} from "@ngrx/store";
 import {Observable} from "rxjs";
 import {UserModel} from "../../domain/models/user/user.model";
 import {loggedUserSelector} from "../../store/auth/auth-state.selectors";
+import {MatDialog} from "@angular/material/dialog";
+import {AuthModalComponent} from "../auth-modal/auth-modal.component";
 
 @Component({
   selector: 'app-header',
@@ -16,7 +18,8 @@ export class HeaderComponent implements OnInit {
 
   constructor
   (
-    private store: Store<ApplicationStore>
+    private store: Store<ApplicationStore>,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -24,6 +27,12 @@ export class HeaderComponent implements OnInit {
 
   click() {
     alert('click');
+  }
+
+  public onLoginClick(): void {
+    let dialogRef = this.dialog.open(AuthModalComponent, {
+      width: '600px'
+    });
   }
 
 }

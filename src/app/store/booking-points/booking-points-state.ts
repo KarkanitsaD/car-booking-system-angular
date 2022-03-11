@@ -1,15 +1,12 @@
-import {BookingPointModel} from "../../domain/models/booking-point/booking-point.model";
 import {BookingPointFiltrationModel} from "../../domain/models/booking-point/booking-point-filtration.model";
 
 export const bookingPointsState = 'bookingPoints';
 
 export interface BookingPointsState {
-  bookingPoints: BookingPointModel[];
   currentFiltrationModel: BookingPointFiltrationModel;
 };
 
 export const initialBookingPointsState: BookingPointsState = {
-  bookingPoints: [],
   currentFiltrationModel: getInitialBookingPointFiltrationModel()
 };
 

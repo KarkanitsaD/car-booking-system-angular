@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserLoginRequestModel} from "../../domain/models/user/user-login-request.model";
 
@@ -8,6 +8,8 @@ import {UserLoginRequestModel} from "../../domain/models/user/user-login-request
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
+  @Output() onFormSubmitted = new EventEmitter<UserLoginRequestModel>();
 
   login: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -27,6 +29,7 @@ export class LoginComponent implements OnInit {
       this.login.markAllAsTouched();
     } else {
       let loginRequestModel = new UserLoginRequestModel(this.login.controls.email.value, this.login.controls.password.value);
+      this.onFormSubmitted.emit(loginRequestModel);
     }
   }
 }

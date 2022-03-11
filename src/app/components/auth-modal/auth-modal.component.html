@@ -1,0 +1,17 @@
+<div style="height: 30px; text-align: right">
+  <button mat-raised-button (click)="close()">
+    Close
+  </button>
+</div>
+<mat-tab-group mat-align-tabs="center">
+  <mat-tab label="Login">
+    <app-login (onFormSubmitted)="onLogin($event)">
+
+    </app-login>
+  </mat-tab>
+  <mat-tab label="Register">
+    <app-registration>
+
+    </app-registration>
+  </mat-tab>
+</mat-tab-group>
