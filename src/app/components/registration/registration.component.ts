@@ -11,7 +11,7 @@ import {AuthService} from "../../core/services/auth.service";
 })
 export class RegistrationComponent implements OnInit {
 
-  @Output() onSuccessRegistration = new EventEmitter();
+  @Output() onFormSubmitted = new EventEmitter();
 
   registrationForm = this.fb.group({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -21,7 +21,7 @@ export class RegistrationComponent implements OnInit {
     userSurname: new FormControl(''),
     phoneNumber: new FormControl('')
   }, {
-    validator: this.passwordConfirmValidation
+    validator: RegistrationComponent.passwordConfirmValidation
   });
 
   userImage: ImageModel | null = null;
@@ -47,9 +47,9 @@ export class RegistrationComponent implements OnInit {
         this.registrationForm.controls.userName.value,
         this.registrationForm.controls.userSurname.value,
         this.registrationForm.controls.phoneNumber.value,
-        this.userImage
+        this.userImage !== null ? this.userImage.url : null
       );
-      //send action to store about registration
+      this.onFormSubmitted.emit(userRegistrationModel);
     }
   }
 
@@ -57,7 +57,7 @@ export class RegistrationComponent implements OnInit {
     this.userImage = image;
   }
 
-  private passwordConfirmValidation(form: FormGroup) {
+  private static passwordConfirmValidation(form: FormGroup) {
     if(form.controls.password.value !== form.controls.confirmPassword.value) {
       form.controls.confirmPassword.setErrors({mustMatch: true});
     } else {

@@ -8,6 +8,6 @@ export interface AuthState {
 }
 
 export const initialAuthState: AuthState = {
-  loggedInUser: /*new UserModel('1', 'email', 'dima', 'karkanitsa', 'phone', '12', [])*/ undefined,
+  loggedInUser: /*new UserModel('1', 'email', 'dima', 'karkanitsa', 'phone', [])*/ undefined,
   isAuthenticationInProgress: false
 };

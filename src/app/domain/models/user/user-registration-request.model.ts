@@ -6,7 +6,7 @@ export class UserRegistrationRequestModel {
   name: string;
   surname: string;
   phoneNumber: string;
-  image: ImageModel | null;
+  imageBase64Content: string | null;
 
   constructor(
     email: string,
@@ -14,13 +14,13 @@ export class UserRegistrationRequestModel {
     name: string,
     surname: string,
     phoneNumber: string,
-    image: ImageModel | null
+    image: string | null
   ) {
     this.email = email;
     this.password = password;
     this.name = name;
     this.surname = surname;
     this.phoneNumber = phoneNumber,
-    this.image = image;
+    this.imageBase64Content = image;
   }
 }

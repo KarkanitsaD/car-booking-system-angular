@@ -24,6 +24,7 @@ import { BookingPointFiltrationFormComponent } from './components/booking-point/
 import { BookingPointsPageComponent } from './components/booking-point/booking-points-page/booking-points-page.component';
 import { AuthModalComponent } from './components/auth-modal/auth-modal.component';
 import {HttpHeadersInterceptor} from "./core/interceptors/http-headers.interceptor";
+import {MatMenuModule} from "@angular/material/menu";
 
 
 @NgModule({
@@ -40,20 +41,21 @@ import {HttpHeadersInterceptor} from "./core/interceptors/http-headers.intercept
     BookingPointsPageComponent,
     AuthModalComponent,
   ],
-  imports: [
-    MaterialModule,
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    StoreModule.forRoot(reducers, {
-      metaReducers
-    }),
-    StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
-    MatDatepickerModule,
-    FormsModule
-  ],
+    imports: [
+        MaterialModule,
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        StoreModule.forRoot(reducers, {
+            metaReducers
+        }),
+        StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
+        MatDatepickerModule,
+        FormsModule,
+        MatMenuModule
+    ],
   providers: [
     serviceDeclarations,
     {provide: HTTP_INTERCEPTORS, useClass: HttpHeadersInterceptor, multi: true},

@@ -1,15 +1,6 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormBuilder} from "@angular/forms";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {hoursViewsValues, minutesViewsValues} from "../../core/constans/time-arrays-constans";
-
-export interface DateTimeRangeModel {
-  firstDate: Date;
-  firstHours: number;
-  firstMinutes: number;
-  secondDate: Date;
-  secondHours: number;
-  secondMinutes: number;
-}
+import {DateTimeRangeModel} from "../../domain/models/date-time-range/date-time-range.model";
 
 @Component({
   selector: 'app-date-time-range-picker',
@@ -18,19 +9,27 @@ export interface DateTimeRangeModel {
 })
 export class DateTimeRangePickerComponent implements OnInit {
 
+  @Input() range!: DateTimeRangeModel;
   @Input() dateTimeRange!: DateTimeRangeModel;
   @Output() dateTimeRangeChange: EventEmitter<DateTimeRangeModel> = new EventEmitter<DateTimeRangeModel>();
 
   public hoursViewsValues = hoursViewsValues;
   public minutesViewsValues = minutesViewsValues;
 
-  constructor(private fb: FormBuilder) { }
+  constructor() { }
 
   ngOnInit(): void {
-
+    this.range = {
+      firstDate: this.dateTimeRange.firstDate,
+      firstHours: this.dateTimeRange.firstHours,
+      firstMinutes: this.dateTimeRange.firstMinutes,
+      secondDate: this.dateTimeRange.secondDate,
+      secondHours: this.dateTimeRange.secondHours,
+      secondMinutes: this.dateTimeRange.secondMinutes
+    }
   }
 
   public timeRangeChange(): void {
-    this.dateTimeRangeChange.emit(this.dateTimeRange);
+    this.dateTimeRangeChange.emit(this.range);
   }
 }

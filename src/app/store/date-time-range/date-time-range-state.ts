@@ -1,11 +1,11 @@
+import {DateTimeRangeModel} from "../../domain/models/date-time-range/date-time-range.model";
+
 export const dateTimeRangeState = 'dateTimeRange';
 
 export interface DateTimeRangeState {
-  firstDateTime: Date | null;
-  secondDateTime: Date | null;
+  dateTimeRangeModel: DateTimeRangeModel | null
 };
 
 export const initialDateTimeRangeState: DateTimeRangeState = {
-  firstDateTime: null,
-  secondDateTime: null
+  dateTimeRangeModel: null
 };

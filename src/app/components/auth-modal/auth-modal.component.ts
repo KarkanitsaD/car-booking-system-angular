@@ -7,6 +7,7 @@ import {loginUser} from "../../store/auth/auth-state.actions";
 import {UserLoginRequestModel} from "../../domain/models/user/user-login-request.model";
 import {AuthService} from "../../core/services/auth.service";
 import {TokenService} from "../../core/services/token.service";
+import {UserRegistrationRequestModel} from "../../domain/models/user/user-registration-request.model";
 
 @Component({
   selector: 'app-auth-modal',
@@ -30,10 +31,20 @@ export class AuthModalComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  public onLogin(loginSuccessModel: UserLoginRequestModel): void {
-    this.authService.login(loginSuccessModel)
+  public onLogin(loginRequestModel: UserLoginRequestModel): void {
+    this.authService.login(loginRequestModel)
       .subscribe((data: UserLoginSuccessResponseModel) => {
-        this.tokenService.GetUserFromJwt(data.jwt);
+        this.tokenService.saveJwtInLocalStorage(data.jwt);
+        let user = this.tokenService.getUserFromJwt(data.jwt);
+        this.store.dispatch(loginUser({user: user}));
+        this.dialogRef.close();
+      });
+  }
+
+  public onRegister(registerRequestModel: UserRegistrationRequestModel): void {
+    this.authService.register(registerRequestModel)
+      .subscribe(() => {
+        console.log('OK');
       });
   }
 }

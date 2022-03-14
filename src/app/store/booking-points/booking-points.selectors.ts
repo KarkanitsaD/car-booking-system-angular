@@ -5,5 +5,5 @@ export const bookingPointsSelector = createFeatureSelector<BookingPointsState>(b
 
 export const currentBookingPointsFiltrationModelSelector = createSelector(
   bookingPointsSelector,
-  state => state.currentFiltrationModel
+  state => state.filtrationModel
 );

@@ -6,8 +6,7 @@ export class UserModel {
   name: string;
   surname: string;
   phoneNumber: string;
-  userImageId: string;
-  roles: RoleModel[];
+  roles: string[];
 
   constructor(
     id: string,
@@ -15,15 +14,13 @@ export class UserModel {
     name: string,
     surname: string,
     phoneNumber: string,
-    userImageId: string,
-    roles: RoleModel[]
+    roles: string[]
   ) {
     this.id = id;
     this.email = email;
     this.name = name;
     this.surname = surname;
     this.phoneNumber = phoneNumber;
-    this.userImageId = userImageId;
     this.roles = roles;
   }
 }

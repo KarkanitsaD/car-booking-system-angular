@@ -1,27 +1,16 @@
 import {BookingPointFiltrationModel} from "../../domain/models/booking-point/booking-point-filtration.model";
+import {BookingPointModel} from "../../domain/models/booking-point/booking-point.model";
 
 export const bookingPointsState = 'bookingPoints';
 
 export interface BookingPointsState {
-  currentFiltrationModel: BookingPointFiltrationModel;
+  filtrationModel: BookingPointFiltrationModel | null;
+  bookingPoints: Array<BookingPointModel>,
+  bookingPointsTotalCount: number | null
 };
 
 export const initialBookingPointsState: BookingPointsState = {
-  currentFiltrationModel: getInitialBookingPointFiltrationModel()
+  filtrationModel: null,
+  bookingPoints: [],
+  bookingPointsTotalCount: null
 };
-
-function getInitialBookingPointFiltrationModel(): BookingPointFiltrationModel {
-  let currentDate = new Date();
-
-  let firstDate = new Date();
-  firstDate.setUTCDate(currentDate.getDate() + 1);
-  firstDate.setUTCHours(10);
-  firstDate.setUTCMinutes(0);
-
-  let secondDate = new Date();
-  secondDate.setUTCDate(currentDate.getDate() + 2);
-  secondDate.setUTCHours(10);
-  secondDate.setUTCMinutes(0);
-
-  return new BookingPointFiltrationModel(firstDate, secondDate, null, null);
-}
