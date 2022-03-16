@@ -1,14 +1,21 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Store} from "@ngrx/store";
 import {ApplicationStore} from "../../../store";
 import {fromEvent, Observable} from "rxjs";
 import {CountryModel} from "../../../domain/models/country/country.model";
-import {citiesSelector, countriesSelector} from "../../../store/location/location-state.selectors";
+import {
+  areCitiesLoaded,
+  areCountriesLoaded,
+  citiesSelector,
+  countriesSelector
+} from "../../../store/location/location-state.selectors";
 import {CityModel} from "../../../domain/models/city/city.model";
-import {map, throttleTime} from "rxjs/operators";
+import {map, take, throttleTime} from "rxjs/operators";
 import {DateTimeRangeModel} from "../../../domain/models/date-time-range/date-time-range.model";
 import {dateTimeRangeSelector} from "../../../store/date-time-range/date-time-range.selectors";
 import {setTimeRange} from "../../../store/date-time-range/date-time-range.actions";
+import {setBookingPointsCityId, setBookingPointsCountryId} from "../../../store/booking-points/booking-points.actions";
+import {loadAllCities, loadAllCountries} from "../../../store/location/location-state.actions";
 
 @Component({
   selector: 'app-booking-point-filtration-form',
@@ -23,6 +30,8 @@ export class BookingPointFiltrationFormComponent implements OnInit, AfterViewIni
   public cityId: string | null = null;
   public countryId: string | null = null;
 
+  @Output() public onFilter = new EventEmitter();
+
   public dateTimeRangeModel!: DateTimeRangeModel;
 
   constructor
@@ -31,33 +40,14 @@ export class BookingPointFiltrationFormComponent implements OnInit, AfterViewIni
   ) { }
 
   ngOnInit(): void {
-    this.store.select(dateTimeRangeSelector).subscribe((range: DateTimeRangeModel | null) => {
-      if(range) {
-        this.dateTimeRangeModel = range;
-      } else {
-        let today = new Date();
-        let tomorrow = new Date();
-        tomorrow.setUTCDate(today.getUTCDate() + 1);
-        tomorrow.setUTCHours(0);
-        tomorrow.setUTCMinutes(0);
-        tomorrow.setUTCSeconds(0);
+    this.store.select(areCitiesLoaded)
+      .subscribe(loaded => loaded ? {} : this.store.dispatch(loadAllCities()));
 
-        let dayAfterTomorrow = new Date();
-        dayAfterTomorrow.setUTCDate(today.getUTCDate() + 2);
-        dayAfterTomorrow.setUTCHours(0);
-        dayAfterTomorrow.setUTCMinutes(0);
-        dayAfterTomorrow.setUTCSeconds(0);
+    this.store.select(areCountriesLoaded)
+      .subscribe(loaded => loaded ? {} : this.store.dispatch(loadAllCountries()));
 
-        this.dateTimeRangeModel = {
-          firstDate: tomorrow,
-          firstHours: 10,
-          firstMinutes: 0,
-          secondDate: dayAfterTomorrow,
-          secondHours: 19,
-          secondMinutes: 0
-        };
-        this.store.dispatch(setTimeRange({dateTimeRange: Object.assign({}, this.dateTimeRangeModel)}));
-      }
+    this.store.select(dateTimeRangeSelector).subscribe((range: DateTimeRangeModel) => {
+      this.dateTimeRangeModel = range;
     });
   }
 
@@ -70,6 +60,14 @@ export class BookingPointFiltrationFormComponent implements OnInit, AfterViewIni
       ).subscribe(() => {
         this.store.dispatch(setTimeRange({dateTimeRange: Object.assign({}, this.dateTimeRangeModel)}));
     });
+  }
+
+  public filterClick(): void {
+    let range = Object.assign({}, this.dateTimeRangeModel);
+    this.store.dispatch(setTimeRange({dateTimeRange: range}));
+    this.store.dispatch(setBookingPointsCountryId({countryId: this.countryId}));
+    this.store.dispatch(setBookingPointsCityId({cityId: null}));
+    this.onFilter.emit();
   }
 
   public onCountrySelected(): void {

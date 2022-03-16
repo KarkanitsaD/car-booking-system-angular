@@ -1,11 +1,30 @@
 <div class="main-div">
   <div class="filtration-form-div">
     <div class="filtration-form">
-      <app-booking-point-filtration-form>
+      <app-booking-point-filtration-form (onFilter)="onFilter()">
       </app-booking-point-filtration-form>
     </div>
   </div>
-  <div class="booking-point-list">
-
+  <br>
+  <div class="booking-point-list-div">
+    <div class="booking-point-list">
+      <div *ngFor="let bookingPoint of bookingPoints; let i = index;">
+        <div *ngIf="i % 2 == 0" class="booking-points-double-div">
+          <app-booking-point-item [bookingPoint]="bookingPoint" (onBookingPointSelected)="onBookingPointSelected($event)"></app-booking-point-item>
+          <app-booking-point-item *ngIf="i + 1 < bookingPoints.length" [bookingPoint]="bookingPoints[i + 1]" (onBookingPointSelected)="onBookingPointSelected($event)"></app-booking-point-item>
+        </div>
+        <br *ngIf="i % 2 == 0">
+      </div>
+    </div>
+  </div>
+  <div class="pagination-div">
+    <mat-paginator
+      *ngIf="bookingPoints.length > bookingPointsTotalCount"
+      [pageIndex]="initialPageIndex$ | async"
+      [length]="bookingPointsTotalCount"
+      [pageSize]="pageSize"
+      [hidePageSize]="true"
+      (page)="onPageChanged($event)">
+    </mat-paginator>
   </div>
 </div>

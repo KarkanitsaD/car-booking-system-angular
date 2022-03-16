@@ -1,0 +1,14 @@
+<mat-card class="booking-point-item-div">
+  <mat-card-title>
+    {{bookingPoint.title}}
+  </mat-card-title>
+  <mat-card-subtitle>
+    {{bookingPoint.country + ' ' + bookingPoint.city}}
+  </mat-card-subtitle>
+  <mat-card-content>
+    {{bookingPoint.address}}
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="onSeeCarsClick()">See cars</button>
+  </mat-card-actions>
+</mat-card>

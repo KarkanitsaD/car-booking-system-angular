@@ -25,6 +25,15 @@ import { BookingPointsPageComponent } from './components/booking-point/booking-p
 import { AuthModalComponent } from './components/auth-modal/auth-modal.component';
 import {HttpHeadersInterceptor} from "./core/interceptors/http-headers.interceptor";
 import {MatMenuModule} from "@angular/material/menu";
+import { EffectsModule } from '@ngrx/effects';
+import {BookingPointsEffects} from "./store/booking-points/booking-points.effects";
+import { BookingPointItemComponent } from './components/booking-point/booking-point-item/booking-point-item.component';
+import {MatCardModule} from "@angular/material/card";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {CarsEffects} from "./store/cars/cars.effects";
+import {LocationsEffects} from "./store/location/location-state.effects";
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { CarPageComponent } from './components/car/car-page/car-page.component';
 
 
 @NgModule({
@@ -40,22 +49,28 @@ import {MatMenuModule} from "@angular/material/menu";
     BookingPointFiltrationFormComponent,
     BookingPointsPageComponent,
     AuthModalComponent,
+    BookingPointItemComponent,
+    NotFoundComponent,
+    CarPageComponent,
   ],
-    imports: [
-        MaterialModule,
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        StoreModule.forRoot(reducers, {
-            metaReducers
-        }),
-        StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
-        MatDatepickerModule,
-        FormsModule,
-        MatMenuModule
-    ],
+  imports: [
+    MaterialModule,
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    StoreModule.forRoot(reducers, {
+      metaReducers
+    }),
+    StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
+    MatDatepickerModule,
+    FormsModule,
+    MatMenuModule,
+    EffectsModule.forRoot([BookingPointsEffects, CarsEffects, LocationsEffects]),
+    MatCardModule,
+    MatPaginatorModule
+  ],
   providers: [
     serviceDeclarations,
     {provide: HTTP_INTERCEPTORS, useClass: HttpHeadersInterceptor, multi: true},

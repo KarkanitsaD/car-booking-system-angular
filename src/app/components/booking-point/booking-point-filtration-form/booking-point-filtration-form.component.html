@@ -5,7 +5,7 @@
         <mat-form-field appearance="outline">
           <mat-label>Country</mat-label>
           <mat-select [(ngModel)]="countryId" (ngModelChange)="onCountrySelected()">
-            <mat-option value="null">
+            <mat-option [value]="null">
               All
             </mat-option>
             <mat-option *ngFor="let country of countries$ | async" [value]="country.id">
@@ -18,7 +18,7 @@
         <mat-form-field appearance="outline">
           <mat-label>City</mat-label>
           <mat-select [(ngModel)]="cityId">
-            <mat-option value="null">
+            <mat-option [value]="null">
               All
             </mat-option>
             <mat-option *ngFor="let city of citiesToShow$ | async" [value]="city.id">
@@ -33,7 +33,7 @@
     </div>
   </div>
   <div>
-    <button id="filterButton" mat-raised-button color="primary" class="filter-button">
+    <button id="filterButton" mat-raised-button color="primary" class="filter-button" (click)="filterClick()">
       Filter
     </button>
   </div>

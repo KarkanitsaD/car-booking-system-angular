@@ -11,8 +11,8 @@ export interface LocationState {
 }
 
 export const initialLocationState: LocationState = {
-  cities: [new CityModel('1', 'One', '1'), new CityModel('2', '1Two', '1'), new CityModel('2', 'One', '2')],
+  cities: [],
   citiesLoaded: false,
-  countries: [new CountryModel('1', 'One'), new CountryModel('2', 'Two'), new CountryModel('3', 'Three')],
+  countries: [],
   countriesLoaded: false
 };

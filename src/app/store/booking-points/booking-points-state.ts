@@ -1,16 +1,27 @@
-import {BookingPointFiltrationModel} from "../../domain/models/booking-point/booking-point-filtration.model";
 import {BookingPointModel} from "../../domain/models/booking-point/booking-point.model";
 
 export const bookingPointsState = 'bookingPoints';
 
 export interface BookingPointsState {
-  filtrationModel: BookingPointFiltrationModel | null;
-  bookingPoints: Array<BookingPointModel>,
-  bookingPointsTotalCount: number | null
-};
+  countryId: string | null;
+  cityId: string | null;
+  pageIndex: number;
+  bookingPoints: BookingPointModel[];
+  bookingPointsTotalCount: number;
+}
 
 export const initialBookingPointsState: BookingPointsState = {
-  filtrationModel: null,
-  bookingPoints: [],
-  bookingPointsTotalCount: null
+  countryId: null,
+  cityId: null,
+  pageIndex: 0,
+  bookingPoints: [
+    new BookingPointModel('s','s','s','s','s',),
+    new BookingPointModel('s','s','s','s','s',),
+    new BookingPointModel('s','s','s','s','s',),
+    new BookingPointModel('s','s','s','s','s',),
+    new BookingPointModel('s','s','s','s','s',),
+    new BookingPointModel('s','s','s','s','s',),
+    new BookingPointModel('s','s','s','s','s',),
+  ],
+  bookingPointsTotalCount: 0
 };
